@@ -11,7 +11,12 @@ public class UnitPath : MonoBehaviour
 
     void Start()
     {
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        // PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+    }
+
+    public void desplazarme(Vector3 positionA)
+    {
+        PathRequestManager.RequestPath(transform.position, positionA, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
