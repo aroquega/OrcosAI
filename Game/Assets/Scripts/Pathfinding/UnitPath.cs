@@ -32,23 +32,27 @@ public class UnitPath : MonoBehaviour
     /*TODO path misma posicion*/
     IEnumerator FollowPath()
     {
-        Vector3 currentWaypoint = path[0];
-        while (true)
+        if(path.Length > 0)
         {
-            if (transform.position == currentWaypoint)
+            Vector3 currentWaypoint = path[0];
+            while (true)
             {
-                targetIndex++;
-                if (targetIndex >= path.Length)
+                if (transform.position == currentWaypoint)
                 {
-                    yield break;
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        yield break;
+                    }
+                    currentWaypoint = path[targetIndex];
                 }
-                currentWaypoint = path[targetIndex];
+
+                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                yield return null;
+
             }
-
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            yield return null;
-
         }
+
     }
 
     public void OnDrawGizmos()
@@ -58,7 +62,7 @@ public class UnitPath : MonoBehaviour
             for (int i = targetIndex; i < path.Length; i++)
             {
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], Vector3.one);
+                Gizmos.DrawCube(path[i], Vector3.one / 2);
 
                 if (i == targetIndex)
                 {
