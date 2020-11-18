@@ -14,7 +14,8 @@ TagManager:
   - UI
   - 
   - 
-  - ClickableTerrain
+
+  - Layer8
   - Unwalkable
   - ClickableObjects
   - 

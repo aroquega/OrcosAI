@@ -30,8 +30,7 @@ public class SelectionSquare : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectionSquareTrans.gameObject.SetActive(false);
-        DeseleccionarUnidades();
+
     }
 
     // Update is called once per frame
@@ -44,7 +43,7 @@ public class SelectionSquare : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-         
+
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 200f, 1 << 8))
             {
@@ -64,7 +63,10 @@ public class SelectionSquare : MonoBehaviour
             selectionSquareTrans.gameObject.SetActive(false);
 
 
-                     RaycastHit hit;
+            DeseleccionarUnidades();
+
+            RaycastHit hit;
+
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 200f, 1 << 8))
             {
                 squareEndPos = hit.point;
@@ -76,7 +78,8 @@ public class SelectionSquare : MonoBehaviour
             }
             else// estoy tratando de seleccionar varias unidades
             {
-                DeseleccionarUnidades();
+
+
                 SeleccionarUnidades();
             }
             ActualizarAspectoUnidadesSeleccionadas();
@@ -112,24 +115,10 @@ public class SelectionSquare : MonoBehaviour
         {
             if (hit.collider.CompareTag(tagObjetivo))
             {
-                DeseleccionarUnidades();
+
                 selectedUnits.Add(hit.collider.gameObject);   
             }
-            else
-            {/*Estoy apuntando a un punto dentro del suelo*/
 
-                Vector3 destino = hit.point;
-             
-                if (selectedUnits.Count > 0)
-                {
-                    foreach (GameObject obj in selectedUnits)
-                    {
-                        Debug.Log("Hola "+destino);
-                        obj.GetComponent<UnitPath>().desplazarme(destino);
-                    }
-                }
-                DeseleccionarUnidades();
-            }
         }
     }
 
