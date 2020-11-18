@@ -30,7 +30,7 @@ public class SelectionSquare : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -43,6 +43,7 @@ public class SelectionSquare : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 200f, 1 << 8))
             {
@@ -61,9 +62,11 @@ public class SelectionSquare : MonoBehaviour
         {
             selectionSquareTrans.gameObject.SetActive(false);
 
+
             DeseleccionarUnidades();
 
             RaycastHit hit;
+
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 200f, 1 << 8))
             {
                 squareEndPos = hit.point;
@@ -75,6 +78,8 @@ public class SelectionSquare : MonoBehaviour
             }
             else// estoy tratando de seleccionar varias unidades
             {
+
+
                 SeleccionarUnidades();
             }
             ActualizarAspectoUnidadesSeleccionadas();
@@ -110,8 +115,10 @@ public class SelectionSquare : MonoBehaviour
         {
             if (hit.collider.CompareTag(tagObjetivo))
             {
+
                 selectedUnits.Add(hit.collider.gameObject);   
             }
+
         }
     }
 
